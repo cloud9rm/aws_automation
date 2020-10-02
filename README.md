@@ -5,7 +5,7 @@ AD JOIN 과정
 :Windows 호스트 네임 변경 -> Reboot -> AD JOIN(도메인가입) -> Reboot
 
 위의 과정을 자동화
-'''
+```
 [Ansible Controller 서버 세팅(Ubuntu 18.04 기준)]
 
 sudo apt-get update
@@ -30,7 +30,7 @@ sudo apt-get install awscli
 pip3 install pywinrm
 
 #윈도우 인스턴스와 통신하기 위해서는 winrm 필요
-'''
+```
 [Ansible Remote 서버 세팅(Windows Server 2019 기준)]
 
 $url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
