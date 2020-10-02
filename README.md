@@ -28,5 +28,5 @@ $file = "$env:temp\ConfigureRemotingForAnsible.ps1"
 (New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
 powershell.exe -ExecutionPolicy ByPass -File $file
 winrm set winrm/config/service '@{AllowUnencrypted="true"}'
-# 대상 윈도우 인스턴스의 Winrm 
+# 대상 윈도우 인스턴스의 Winrm 서비스 
 ```
