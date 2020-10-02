@@ -1,0 +1,14 @@
+[Ec2Auto]
+10.10.0.1
+10.10.0.2
+
+[Ec2Auto:vars]
+ansible_user = local_admin
+ansible_password = local12#$
+ansible_connection = winrm
+ansible_winrm_server_cet_validation = ignore
+ansible_port = 5985
+
+ansible_become = yes
+ansible_become_method = runas
+ansible_become_user = Administrator
