@@ -11,11 +11,11 @@ sudo apt-get update
 sudo apt-get install python3-pip
 sudo apt-get install ansible
 
-# apt-get으로만 앤서블을 설치할 경우 파이썬2에 설치됨. 따라서 pip3로 파이썬3에 Ansible을 설치해준다.
-# pip3로만 앤서블을 설치할 경우 앤서블의 기본적인 환경 세팅이 누락되는 경우가 있음. 따라서 apt-get으로 먼저 설치해준 후, pip3로 한번 더 설치해준다.
+#apt-get으로만 앤서블을 설치할 경우 파이썬2에 설치됨. 따라서 pip3로 파이썬3에 Ansible을 설치해준다.
+#pip3로만 앤서블을 설치할 경우 앤서블의 기본적인 환경 세팅이 누락되는 경우가 있음. 따라서 apt-get으로 먼저 설치해준 후, pip3로 한번 더 설치해준다.
 sudo pip3 install ansible
 sudo sed -i 's/python2/python3/' usr/bin/ansible
-# shebang 변경. python2 -> python3
+#shebang 변경. python2 -> python3
 sudo apt-get install awscli
 pip3 install pywinrm
-# 윈도우 인스턴스와 통신하기 위해서는 winrm 필요
+#윈도우 인스턴스와 통신하기 위해서는 winrm 필요
