@@ -5,6 +5,8 @@ AD JOIN 과정
 :Windows 호스트 네임 변경 -> Reboot -> AD JOIN(도메인가입) -> Reboot
 
 위의 과정을 자동화
+
+# 서버세팅
 ```
 [Ansible Controller 서버 세팅(Ubuntu 18.04 기준)]
 
@@ -30,3 +32,14 @@ powershell.exe -ExecutionPolicy ByPass -File $file
 winrm set winrm/config/service '@{AllowUnencrypted="true"}'
 # 대상 윈도우 인스턴스의 Winrm 서비스 
 ```
+# 작동 방법
+
+mv ./hosts /etc/ansible/hosts
+
+hosts에 타겟 서버의 IP 입력
+
+Ec2Auto.py 실행
+
+도메인 유저와 패스워드를 요구하면 입력
+
+타겟 서버가 자동으로 AWS 네임태그를 불러와 Hostname으로 지정하고 재부팅한 후 AD JOIN까지 실행한다.
