@@ -9,12 +9,8 @@ AD JOIN 과정
 [Ansible Controller 서버 세팅(Ubuntu 18.04 기준)]
 
 sudo apt-get update
-
 sudo apt-get install python3-pip
-
 sudo apt-get install ansible
-
-
 #apt-get으로만 앤서블을 설치할 경우 파이썬2에 설치됨. 따라서 pip3로 파이썬3에 Ansible을 설치해준다.
 
 #pip3로만 앤서블을 설치할 경우 앤서블의 기본적인 환경 세팅이 누락되는 경우가 있음. 따라서 apt-get으로 먼저 설치해준 후, pip3로 한번 더 설치해준다.
