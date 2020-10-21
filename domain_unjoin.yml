@@ -1,0 +1,25 @@
+---
+- name: Domain unjoin
+  hosts: "{{private_ip}}"
+  gather_facts: false
+
+  tasks: 
+    - name: Domain unjoin
+      win_domain_membership:
+        workgroup_name: WORKGROUP
+        domain_admin_user: "{{domain_user}}"
+        domain_admin_password: "{{domain_passwd}}"
+        state: workgroup
+      register: domain_unjoin
+
+    - name: Reboot
+      win_reboot:
+      #async: 3600
+      #poll: 0
+      when: domain_unjoin.reboot_required
+      register: reboot
+
+    - name: debug
+      debug:
+        msg: "Domain unjoined and Reboot"
+      #when: reboot.

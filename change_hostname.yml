@@ -1,0 +1,35 @@
+---
+- name: Change hostname and Reboot
+  hosts: "{{private_ip}}"
+  gather_facts: false
+
+  tasks: 
+    # - name: Include vars yaml file
+      # include_vars: "ip_nametag_mapping_list.yml"
+    - name: Change hostname
+      win_hostname:
+        name: "{{name_tag}}"
+      register: change_hostname
+        # name: "{{item.name_tag}}"
+      # with_items: "{{target_host}}"
+
+
+    - name: Reboot
+      win_reboot:
+      #async: 3600
+      #poll: 0
+      when: change_hostname.reboot_required
+      register: reboot
+
+    - name: wait for the reboot to complete
+      wait_for_connection:
+        connect_timeout: 20
+        sleep: 5
+        delay: 5
+        timeout: 300
+      when: reboot is succeeded
+
+    - name: debug
+      debug:
+        msg: "Hostname changed and Start Reboot"
+      #when: reboot.
