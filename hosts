@@ -1,3 +1,19 @@
 [Ec2Auto]
+<<<<<<< HEAD
 10.255.46.25
 10.255.46.15
+=======
+10.10.0.1
+10.10.0.2
+
+[Ec2Auto:vars]
+ansible_user = local_admin
+ansible_password = local12#$
+ansible_connection = winrm
+ansible_winrm_server_cet_validation = ignore
+ansible_port = 5985
+
+ansible_become = yes
+ansible_become_method = runas
+ansible_become_user = Administrator
+>>>>>>> b9456e5342c33987983110ceb7df2e01843aec16

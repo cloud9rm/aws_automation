@@ -1,9 +1,12 @@
 import os
 import subprocess
 import yaml
+<<<<<<< HEAD
 import sys
 import getpass
 from time import sleep
+=======
+>>>>>>> b9456e5342c33987983110ceb7df2e01843aec16
 
 class Ec2Auto:
     def __init__(self):
@@ -33,11 +36,16 @@ class Ec2Auto:
                 print("awscli hasn't be installed. First, Install awscli")
                 print("Bye")
                 break
+<<<<<<< HEAD
             print('check aws iam get-user')
+=======
+            print('CHECK aws iam get-user')
+>>>>>>> b9456e5342c33987983110ceb7df2e01843aec16
             exit_code=subprocess.call('aws iam get-user',shell=True)
             if exit_code == 0:
                 print('aws iam get-user SUCCESS')
                 break
+<<<<<<< HEAD
             
             
             print('aws iam get-user FAILED')
@@ -59,6 +67,9 @@ class Ec2Auto:
                 print("mkdir ~/.aws")
                 os.mkdir('~/.aws')
             '''
+=======
+            print('aws iam get-user FAILED')
+>>>>>>> b9456e5342c33987983110ceb7df2e01843aec16
             print("aws configure")
             os.system('aws configure')
             print("aws configure done")
@@ -77,7 +88,11 @@ class Ec2Auto:
                     }
             self.ip_nametag_mapping_list.append(dict)
         self.ip_nametag_mapping_list_beans={'target_host' : self.ip_nametag_mapping_list}
+<<<<<<< HEAD
         # print(self.ip_nametag_mapping_list)
+=======
+        print(self.ip_nametag_mapping_list)
+>>>>>>> b9456e5342c33987983110ceb7df2e01843aec16
         print(self.ip_nametag_mapping_list_beans)
 
     def dump_yaml_from_dict(self):
@@ -87,6 +102,7 @@ class Ec2Auto:
         with open('ip_nametag_mapping_list.yml','r') as t:
             print(t.read())
 
+<<<<<<< HEAD
     def write_vault_passwd(self):
         self.vault_passwd = getpass.getpass('PLEASE ENTER VAULT PASSWORD\n')
         with open('.passwd','w') as file:
@@ -161,10 +177,53 @@ class Ec2Auto:
 
     def delete_vault_passwd(self):
         os.system('sudo rm .passwd')
+=======
+    def ansible_ping_check(self):
+        # check ansible localhost
+        exit_code=subprocess.call('ansible localhost -m ping',shell=True)
+        print(exit_code)
+
+        # check ansible remote target
+        exit_code=subprocess.call('ansible all -m win_ping',shell=True)
+        print(exit_code)
+
+
+    def ansible_change_hostname_and_reboot(self):
+        # execute ansible-playbook for changing hostname and rebooting
+        for item in self.ip_nametag_mapping_list:
+            private_ip = item['private_ip']
+            name_tag = item['name_tag']
+            os.system(f'ansible-playbook change_hostname.yml -e "private_ip={private_ip} name_tag={name_tag}"')
+
+    def ansible_domain_join(self):
+        # execute ansible-playbook for joining domain and rebooting
+        print("Insert Domain name : ", end='')
+        domain_name = input()
+        print("Insert Domain user : ", end='')
+        domain_user = input()
+        print("Insert Domain password : ",end='')
+        domain_passwd = input()
+        for item in self.ip_nametag_mapping_list:
+            private_ip = item['private_ip']
+            os.system(f'ansible-playbook domain_join.yml -e "private_ip={private_ip} domain_name={domain_name} \
+                    domain_user={domain_user} domain_passwd={domain_passwd}"')
+
+    def ansible_domain_unjoin(self):
+        # execute ansible-playbook for unjoining domain and rebooting
+        print("Insert Domain user : ", end='')
+        domain_user = input()
+        print("Insert Domain password : ",end='')
+        domain_passwd = input()
+        for item in self.ip_nametag_mapping_list:
+            private_ip = item['private_ip']
+            os.system(f'ansible-playbook domain_unjoin.yml -e "private_ip={private_ip} \
+                    domain_user={domain_user} domain_passwd={domain_passwd}"')
+>>>>>>> b9456e5342c33987983110ceb7df2e01843aec16
 
 if __name__ == '__main__':
     Ec2Auto = Ec2Auto()
     Ec2Auto.read_ini()
+<<<<<<< HEAD
 
     Ec2Auto.awscli_iam_getuser()
     Ec2Auto.awscli_ec2_instance_name_tag()
@@ -175,3 +234,15 @@ if __name__ == '__main__':
     Ec2Auto.ansible_change_hostname_and_reboot()
     Ec2Auto.ansible_domain_join()
     # Ec2Auto.delete_vault_passwd()
+=======
+    Ec2Auto.awscli_iam_getuser()
+    Ec2Auto.awscli_ec2_instance_name_tag()
+
+
+    Ec2Auto.ansible_ping_check()
+    Ec2Auto.ansible_domain_unjoin()
+    Ec2Auto.ansible_change_hostname_and_reboot()
+    Ec2Auto.dump_yaml_from_dict()
+
+    # Ec2Auto.ansible_domain_join()
+>>>>>>> b9456e5342c33987983110ceb7df2e01843aec16

@@ -14,12 +14,19 @@
 
     - name: Reboot
       win_reboot:
+<<<<<<< HEAD
       #async: 3600
       #poll: 0
+=======
+>>>>>>> b9456e5342c33987983110ceb7df2e01843aec16
       when: domain_join.reboot_required
       register: reboot
 
     - name: debug
       debug:
         msg: "Domain joined and Reboot"
+<<<<<<< HEAD
       #when: reboot.
+=======
+      #when: reboot
+>>>>>>> b9456e5342c33987983110ceb7df2e01843aec16
